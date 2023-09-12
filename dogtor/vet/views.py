@@ -4,7 +4,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.views.generic import View, TemplateView, ListView, DetailView
 # Create your views here.
-from vet.models import PetOwner
+from vet.models import PetOwner, Pet
 def list_pet_owners(request):
     owners=PetOwner.objects.all()
     context={"owners": owners}
@@ -27,6 +27,29 @@ class OwnerDetail(DetailView):
     model=PetOwner
     template_name="vet/owners/detail.html"
     context_object_name="owner"
+
+class PetsList(TemplateView):
+    #reenderizar el template
+    template_name="vet/pets/pet_list.html"
+    #contexto del template
+    def get_context_data(self, **kwargs):
+        #agarrar el contexto de TemplateView
+        context=super().get_context_data(**kwargs)
+        #le agregamos nuestro custom context
+        context["pets"]=Pet.objects.all()
+        return context
+    
+class PetGet(TemplateView):
+    #reenderizar el template
+    template_name="vet/pets/detail.html"
+    #contexto del template
+    def get_context_data(self, **kwargs):
+        #agarrar el contexto de TemplateView
+        print("KWARGS",kwargs)
+        context=super().get_context_data(**kwargs)
+        #le agregamos nuestro custom context
+        context["pet"]=Pet.objects.get(pk=kwargs["pk"])
+        return context
 
 class Test(View):
     #como funcion el metodo(GET,PATCH,POST,DELETE,PUT)
