@@ -2,7 +2,7 @@ from typing import Any
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, ListView, DetailView
 # Create your views here.
 from vet.models import PetOwner
 def list_pet_owners(request):
@@ -11,17 +11,22 @@ def list_pet_owners(request):
     template=loader.get_template("vet/owners/list.html")
     return HttpResponse(template.render(context, request))
 
-class OwnersList(TemplateView):
-    #reenderizar el template
+class OwnersList(ListView):
+    #Modelo con el que estamos manipulando
+    #El template
+    #El contexto que va a tener el template
+    model=PetOwner
     template_name="vet/owners/list.html"
-    #contexto del template
-    def get_context_data(self, **kwargs):
-        #agarrar el contexto de TemplateView
-        context=super().get_context_data(**kwargs)
-        #le agregamos nuestro custom context
-        context["owners"]=PetOwner.objects.all()
-        return context
+    context_object_name="owners"
 
+class OwnerDetail(DetailView):
+    """Render a specific Pet owner with their pk."""
+    #Modelo con el que estamos manipulando
+    #El template
+    #El contexto que va a tener el template
+    model=PetOwner
+    template_name="vet/owners/detail.html"
+    context_object_name="owner"
 
 class Test(View):
     #como funcion el metodo(GET,PATCH,POST,DELETE,PUT)
