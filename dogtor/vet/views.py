@@ -28,28 +28,23 @@ class OwnerDetail(DetailView):
     template_name="vet/owners/detail.html"
     context_object_name="owner"
 
-class PetsList(TemplateView):
-    #reenderizar el template
+class PetsList(ListView):
+    #Modelo con el que estamos manipulando
+    #El template
+    #El contexto que va a tener el template
+    model=Pet
     template_name="vet/pets/pet_list.html"
-    #contexto del template
-    def get_context_data(self, **kwargs):
-        #agarrar el contexto de TemplateView
-        context=super().get_context_data(**kwargs)
-        #le agregamos nuestro custom context
-        context["pets"]=Pet.objects.all()
-        return context
-    
-class PetGet(TemplateView):
-    #reenderizar el template
+    context_object_name="pets"
+
+class PetGet(DetailView):
+    """Render a specific Pet owner with their pk."""
+    #Modelo con el que estamos manipulando
+    #El template
+    #El contexto que va a tener el template
+    model=Pet
     template_name="vet/pets/detail.html"
-    #contexto del template
-    def get_context_data(self, **kwargs):
-        #agarrar el contexto de TemplateView
-        print("KWARGS",kwargs)
-        context=super().get_context_data(**kwargs)
-        #le agregamos nuestro custom context
-        context["pet"]=Pet.objects.get(pk=kwargs["pk"])
-        return context
+    context_object_name="pet"
+
 
 class Test(View):
     #como funcion el metodo(GET,PATCH,POST,DELETE,PUT)
