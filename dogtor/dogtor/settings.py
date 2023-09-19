@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "vet",
     "blog",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Urls de redireccionamiento para login
+LOGIN_REDIRECT_URL="/vet/owners/"
+LOGOUT_REDIRECT_URL="/"
+
+#
+AUTH_USER_MODEL="authentication.ModUser"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

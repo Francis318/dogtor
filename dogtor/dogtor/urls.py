@@ -19,11 +19,14 @@ from django.urls import path, include
 from blog.admin import blog_admin_site
 from vet.admin import pet_admin_site
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),#panel por defecto
     path('blogadmin/', blog_admin_site.urls),#panel de blog de admin
     path('petadmin/', pet_admin_site.urls),#panel de blog de admin
-    path("vet/", include(("vet.urls", "vet")))
+    path("vet/", include(("vet.urls", "vet"))),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 #customizar panel de administrador

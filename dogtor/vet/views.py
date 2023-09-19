@@ -2,7 +2,7 @@ from typing import Any
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
@@ -27,7 +27,7 @@ class OwnersList(ListView):
     context_object_name = "owners"
 
 
-class OwnerDetail(DetailView):
+class OwnerDetail(LoginRequiredMixin, DetailView):
     """Render a specific Pet owner with their pk."""
 
     # Modelo con el que estamos manipulando
@@ -75,7 +75,9 @@ class OwnersUpdate(PermissionRequiredMixin, UpdateView):
     """View used to update a PetOwner"""
     #Permiso que necesita para entrar
     permission_required="vet.change_petowner"
-    raise_exception=True
+    raise_exception=False
+    login_url="/admin/login"
+    redirect_field_name="next"
 
     model = PetOwner
     template_name = "vet/owners/update.html"
