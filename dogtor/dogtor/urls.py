@@ -27,6 +27,7 @@ urlpatterns = [
     path('petadmin/', pet_admin_site.urls),#panel de blog de admin
     path("vet/", include(("vet.urls", "vet"))),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("api/",include(("api.urls","api"))),
 ]
 
 #customizar panel de administrador

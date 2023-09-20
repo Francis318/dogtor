@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "vet",
     "blog",
     "authentication",
+    "api",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
