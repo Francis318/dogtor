@@ -37,21 +37,18 @@ class RetrieveOwnersAPIView(generics.RetrieveAPIView):
     #serializador
     serializer_class=OwnersDetailSerializer
 
-class CreateOwnersAPIView(generics.CreateAPIView):
+class ListCreateOwnersAPIView(generics.ListCreateAPIView):
     """Create Pet Owner Api View"""
     queryset=PetOwner.objects.all()
     #serializador
     serializer_class=OwnersCreateSerializer
 
-class UpdateOwnersAPIView(generics.UpdateAPIView):
-    """Update Pet Owner Api View"""
+class UpdateDestroyOwnersAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """Create Pet Owner Api View"""
     queryset=PetOwner.objects.all()
     #serializador
-    serializer_class=OwnersUpdateSerializer
+    serializer_class=OwnersCreateSerializer
 
-class DeleteOwnersAPIView(generics.DestroyAPIView):
-    """Update Pet Owner Api View"""
-    queryset=PetOwner.objects.all()
-    #serializador
-    serializer_class=OwnersDeliteSerializer
+
+
     
