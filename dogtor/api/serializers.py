@@ -22,3 +22,33 @@ class PetDatesSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model=PetDate
         fields=["id", "datetime", "type", "pet"]
+
+class OwnersListSerializer(serializers.ModelSerializer):
+    """Serializer to list all Pet Owner"""
+    class Meta:
+        model=PetOwner
+        fields=["id", "first_name", "last_name"]
+
+class OwnersDetailSerializer(serializers.ModelSerializer):
+    """Serializer to the Detail of a Pet Owner"""
+    class Meta:
+        model=PetOwner
+        fields="__all__"
+
+class OwnersCreateSerializer(serializers.ModelSerializer):
+    """Serializer to create of a Pet Owner"""
+    class Meta:
+        model=PetOwner
+        fields="__all__"
+
+class OwnersUpdateSerializer(serializers.ModelSerializer):
+    """Serializer to update of a Pet Owner"""
+    class Meta:
+        model=PetOwner
+        fields="__all__"
+
+class OwnersDeliteSerializer(serializers.ModelSerializer):
+    """Serializer to update of a Pet Owner"""
+    class Meta:
+        model=PetOwner
+        fields="__all__"
